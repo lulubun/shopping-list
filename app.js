@@ -44,14 +44,20 @@ $(function() {
     	event.preventDefault();
     	addItem($('#shopping-list-entry').val());
     	renderList();
+        // need to call this function every time an item is added to the DOM
+        registerItemCheckHandler();
 	});
-
 });
 
-$(document).ready(function() {
-	$('.js-shopping-item-toggle').click(function(event) {
-    	$('.js-shopping-item').closest('li').addClass('shopping-item__checked');
-    	renderList();
+// function to register a click handler function for all elements with a 'js-shopping-item-toggle'
+// class. Everytime an element is added to the DOM, we must re-register.
+// The problem initially was that when the code below ran, no elements were in the DOM. We need to re-run
+// this code everytime we add an element to the DOM.
+function registerItemCheckHandler() {
+    $('.js-shopping-item-toggle').click(function(event) {
+        // This will check all elements in the list as they all have the class.
+    	//$('.js-shopping-item').closest('li').addClass('shopping-item__checked');
+        // $(this) is the clicked one, so we get it's closest li element and add our class to it.
+        $(this).closest('li').addClass('shopping-item__checked');
 	});
-
-});
+}
