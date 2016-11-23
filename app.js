@@ -25,26 +25,46 @@ var itemTemplate = (
 function addItem(item) {
 	state.items.push({
 		displayName: item,
+<<<<<<< HEAD
+=======
+        checked: false
+>>>>>>> e15ba0f1284baaa1b898639ca685e95f06767676
 	});
 };
+
+function toggleItemStatus(index) {
+    state.items[index].checked = !state.items[index].checked;
+}
 
 function renderList() {
 	var itemsHtml = [];
 	for (var i = 0; i < state.items.length; i++) {
+<<<<<<< HEAD
 		itemsHtml.push(renderItem(state.items[i]));
+=======
+		itemsHtml.push(renderItem(state.items[i], i));
+>>>>>>> e15ba0f1284baaa1b898639ca685e95f06767676
 		console.log(itemsHtml);
 	}
 	$('.shopping-list').html(itemsHtml);
 }
 
-function renderItem(stateItem) {
+function renderItem(stateItem, index) {
 	var item = $(itemTemplate);
 	var displayName = stateItem.displayName;
 	item.find('.shopping-item').text(displayName);
+    item.attr('id', index);
+    // check if an item is checked, in which case add class to show visual check
+    if (state.items[index].checked == true) {
+        item.addClass('shopping-item__checked');
+    }
 	return item;
 }
 
+// document.ready
 $(function() {
+    registerItemCheckHandler();
+
 	$('#js-shopping-list-form').submit(function(event) {
     	event.preventDefault();
     	registerItemCheckHandler();
@@ -52,13 +72,27 @@ $(function() {
     	renderList();
     	
 	});
-
 });
 
 function registerItemCheckHandler() {
+<<<<<<< HEAD
 	$('ul').on('click', '.js-shopping-item-toggle', function(event) {
 		console.log('click');
     	$(this).closest('li').addClass('shopping-item__checked');
 	});
 
 }
+=======
+    // listener for full list element
+	$('ul').on('click', '.js-shopping-item-toggle', function(event) {
+        // clicked list items
+        var li = $(this).closest('li');
+        // add class to make item visually checked
+    	li.addClass('shopping-item__checked');
+        // logic to update our in memory state to reflect that item has been checked
+        var liId = li.attr('id');
+        toggleItemStatus(liId);
+	});
+
+}
+>>>>>>> e15ba0f1284baaa1b898639ca685e95f06767676
