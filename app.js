@@ -1,7 +1,12 @@
+//after spending hours and hours just trying to understand the Thinkful solution to this, I'm moving on. James Duncan says
+//what I've got is good enough.
+
+//create an empty array for all added items
 var state = {
     items: []
 };
 
+//add all html to the items
 var itemTemplate = (
 	'<li>' +
     '<span class="shopping-item js-shopping-item"></span>' +
@@ -16,11 +21,10 @@ var itemTemplate = (
   '</li>'
 );
 
-
+//function for each item added
 function addItem(item) {
 	state.items.push({
 		displayName: item,
-		checkedOff: false
 	});
 };
 
@@ -28,6 +32,7 @@ function renderList() {
 	var itemsHtml = [];
 	for (var i = 0; i < state.items.length; i++) {
 		itemsHtml.push(renderItem(state.items[i]));
+		console.log(itemsHtml);
 	}
 	$('.shopping-list').html(itemsHtml);
 }
@@ -42,16 +47,18 @@ function renderItem(stateItem) {
 $(function() {
 	$('#js-shopping-list-form').submit(function(event) {
     	event.preventDefault();
+    	registerItemCheckHandler();
     	addItem($('#shopping-list-entry').val());
     	renderList();
+    	
 	});
 
 });
 
-$(document).ready(function() {
-	$('.js-shopping-item-toggle').click(function(event) {
-    	$('.js-shopping-item').closest('li').addClass('shopping-item__checked');
-    	renderList();
+function registerItemCheckHandler() {
+	$('ul').on('click', '.js-shopping-item-toggle', function(event) {
+		console.log('click');
+    	$(this).closest('li').addClass('shopping-item__checked');
 	});
 
-});
+}
