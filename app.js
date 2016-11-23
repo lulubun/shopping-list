@@ -25,7 +25,10 @@ var itemTemplate = (
 function addItem(item) {
 	state.items.push({
 		displayName: item,
+<<<<<<< HEAD
+=======
         checked: false
+>>>>>>> e15ba0f1284baaa1b898639ca685e95f06767676
 	});
 };
 
@@ -36,7 +39,11 @@ function toggleItemStatus(index) {
 function renderList() {
 	var itemsHtml = [];
 	for (var i = 0; i < state.items.length; i++) {
+<<<<<<< HEAD
+		itemsHtml.push(renderItem(state.items[i]));
+=======
 		itemsHtml.push(renderItem(state.items[i], i));
+>>>>>>> e15ba0f1284baaa1b898639ca685e95f06767676
 		console.log(itemsHtml);
 	}
 	$('.shopping-list').html(itemsHtml);
@@ -60,12 +67,22 @@ $(function() {
 
 	$('#js-shopping-list-form').submit(function(event) {
     	event.preventDefault();
+    	registerItemCheckHandler();
     	addItem($('#shopping-list-entry').val());
     	renderList();
+    	
 	});
 });
 
 function registerItemCheckHandler() {
+<<<<<<< HEAD
+	$('ul').on('click', '.js-shopping-item-toggle', function(event) {
+		console.log('click');
+    	$(this).closest('li').addClass('shopping-item__checked');
+	});
+
+}
+=======
     // listener for full list element
 	$('ul').on('click', '.js-shopping-item-toggle', function(event) {
         // clicked list items
@@ -78,3 +95,4 @@ function registerItemCheckHandler() {
 	});
 
 }
+>>>>>>> e15ba0f1284baaa1b898639ca685e95f06767676
